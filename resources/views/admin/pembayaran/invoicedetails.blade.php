@@ -5,21 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     @include('frontendicons.flowbite')
-    <title>Document</title>
+    <title>Print Invoice</title>
 </head>
 <body>
 <div class="p-6 space-y-6">
     @foreach ($pembayaran as $item )
-
-
                 <form id="edit">
             <div class="flex items-center justify-between rounded-t dark:border-gray-600">
-                        <p class="mb-2 text-lg font-semibold text-gray-900 dark:text-white">Invoice</p>
-                        <div class="flex justify-between">
-                        <p class="flex flex-row text-gray-500">Tanggal Pembuatan :</p>
-                        <p class="space-x-10 ml-2">{{$item->tgl_bayar}}</p>
-                        </div>
-                    </div>
+                <p class="mb-2 text-lg font-semibold text-gray-900 dark:text-white">Invoice</p>
+                <div class="flex justify-between">
+                <p class="flex flex-row text-gray-500">Tanggal Pembuatan :</p>
+                <p class="space-x-10 ml-2">{{$item->tgl_bayar}}</p>
+                </div>
+            </div>
 
             <div class="flex items-center pt-7 border-t rounded-t dark:border-gray-600">
                 <div class="flex flex-row">
@@ -69,6 +67,13 @@
                     <p class="space-x-10 ml-2">{{$item->status}}</p>
             </div>
 
+            <div class="flex items-center py-7 rounded-t dark:border-gray-600">
+                <div class="flex flex-row">
+                <p class="flex text-gray-500 mr-3">Pembayaran Bulan</p>
+                <p class="flex ml-20 text-gray-500">:</p>
+                </div>
+                    <p class="space-x-10 ml-2">{{$item->bulan}}</p>
+            </div>
             <div class="flex items-center py-7 border-t rounded-t dark:border-gray-600">
                 <div class="flex flex-row">
                 <p class="flex text-gray-500">Nominal</p>
@@ -79,8 +84,8 @@
 
             <div class="flex items-end py-7 border-t rounded-t dark:border-gray-600">
                 <div class="flex flex-row">
-                <p class="flex font-bold text-gray-500 mr-2">Jumlah Bayar</p>
-                <p class="flex font-bold ml-28 text-gray-500">:</p>
+                <p class="flex font-bold text-gray-500 ml-72">Jumlah Bayar</p>
+                <p class="flex font-bold ml-32 text-gray-500">:</p>
                 </div>
                     <p class=" font-bold space-x-10 ml-2">{{$item->jumlah_bayar}}</p>
             </div>

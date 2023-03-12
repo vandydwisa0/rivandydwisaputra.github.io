@@ -38,15 +38,15 @@
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
                             <th scope="col" class="px-4 py-3">No</th>
-                            <th scope="col" class="px-4 py-3">Nama Siswa</th>
-                            <th scope="col" class="px-4 py-3">Kelas</th>
-                            <th scope="col" class="px-4 py-3">Tahun Spp</th>
-                            <th scope="col" class="px-4 py-3">Bulan</th>
-                            <th scope="col" class="px-4 py-3">Biaya Spp</th>
-                            <th scope="col" class="px-4 py-3">Jumlah Bayar</th>
-                            <th scope="col" class="px-4 py-3">Status</th>
-                            <th scope="col" class="px-4 py-3">Tanggal Bayar</th>
-                            <th scope="col" class="px-4 py-3 text-center">Action</th>
+                            <th scope="col" class="py-3">Nama Siswa</th>
+                            <th scope="col" class="py-3">Kelas</th>
+                            <th scope="col" class="py-3">Tahun Spp</th>
+                            <th scope="col" class="py-3">Bulan</th>
+                            <th scope="col" class="py-3">Biaya Spp</th>
+                            <th scope="col" class="py-3">Jumlah Bayar</th>
+                            <th scope="col" class="py-3">Status</th>
+                            <th scope="col" class="py-3">Tanggal Bayar</th>
+                            <th scope="col" class="py-3 text-center">Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -54,15 +54,15 @@
 
                         <tr class="border-b dark:border-gray-700">
                             <th scope="row" class="px-4 py-3">{{$loop->iteration}}</th>
-                            <td class="px-1 py-3">{{$item->siswa->nama}}</td>
-                            <td class="px-4 py-3">{{$item->siswa->kelas->nama_kelas}} - {{$item->siswa->kelas->singkatan}}</td>
-                            <td class="px-4 py-3">{{$item->spp->tahun}}</td>
-                            <td class="px-4 py-3">{{$item->bulan}}</td>
-                            <td class="px-4 py-3">Rp {{$item->spp->nominal_perbulan}}</td>
-                            <td class="px-4 py-3">Rp {{$item->jumlah_bayar}}</td>
-                            <td class="px-4 py-3">{{$item->status}}</td>
-                            <td class="px-4 py-3">{{$item->tgl_bayar}}</td>
-                            <td class="flex px-6 py-4 items-center justify-center">
+                            <td class="py-3">{{$item->siswa->nama}}</td>
+                            <td class="py-3">{{$item->siswa->kelas->nama_kelas}} - {{$item->siswa->kelas->singkatan}}</td>
+                            <td class="py-3">{{$item->spp->tahun}}</td>
+                            <td class="py-3">{{$item->bulan}}</td>
+                            <td class="py-3">Rp {{$item->spp->nominal_perbulan}}</td>
+                            <td class="py-3">Rp {{$item->jumlah_bayar}}</td>
+                            <td class="py-3">{{$item->status}}</td>
+                            <td class="py-3">{{$item->tgl_bayar}}</td>
+                            <td class="flex px-2 py-4 items-center justify-center">
                                 @if ($item->spp->nominal_perbulan-$item->jumlah_bayar)
                                 @include('admin.pembayaran.edit')
                                 @include('admin.pembayaran.delete')

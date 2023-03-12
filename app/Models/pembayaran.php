@@ -11,6 +11,7 @@ class pembayaran extends Model
 {
     use HasFactory;
     protected $table = 'pembayaran';
+    public $timestamps = false;
     protected $guarded = ['id'];
     public function siswa()
     {

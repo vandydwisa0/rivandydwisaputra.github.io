@@ -25,15 +25,13 @@
             <!-- Modal body -->
             <div class="p-6 space-y-6">
                 <form id="edit">
-
-
             <div class="flex items-center justify-between rounded-t dark:border-gray-600">
-                        <p class="mb-2 text-lg font-semibold text-gray-900 dark:text-white">Invoice</p>
-                        <div class="flex justify-between">
-                        <p class="flex flex-row text-gray-500">Tanggal Pembuatan :</p>
-                        <p class="space-x-10 ml-2">{{$item->tgl_bayar}}</p>
-                        </div>
-                    </div>
+                <p class="mb-2 text-lg font-semibold text-gray-900 dark:text-white">Invoice</p>
+                <div class="flex justify-between">
+                <p class="flex flex-row text-gray-500">Tanggal Pembuatan :</p>
+                <p class="space-x-10 ml-2">{{$item->tgl_bayar}}</p>
+                </div>
+            </div>
 
             <div class="flex items-center pt-7 border-t rounded-t dark:border-gray-600">
                 <div class="flex flex-row">
@@ -83,6 +81,13 @@
                     <p class="space-x-10 ml-2">{{$item->status}}</p>
             </div>
 
+            <div class="flex items-center py-7 rounded-t dark:border-gray-600">
+                <div class="flex flex-row">
+                <p class="flex text-gray-500">Pembayaran Bulan</p>
+                <p class="flex ml-24 text-gray-500">:</p>
+                </div>
+                    <p class="space-x-10 ml-2">{{$item->bulan}}</p>
+            </div>
             <div class="flex items-center py-7 border-t rounded-t dark:border-gray-600">
                 <div class="flex flex-row">
                 <p class="flex text-gray-500">Nominal</p>
