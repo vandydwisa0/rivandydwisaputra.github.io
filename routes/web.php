@@ -24,9 +24,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
 Route::get('/', function() {
     return view('welcome');
 });
@@ -36,7 +33,6 @@ Route::post('/login', [LoginController::class, 'login'])->name('login.siswa.post
 Route::post('/logoutsiswa', [LoginController::class, 'logoutsiswa'])->name('logout.siswa');
 
 Route::post('/logoutpetugas', [LoginPetugasController::class, 'logoutpetugas'])->name('logout.petugas');
-
 Route::get('/loginpetugas', [LoginPetugasController::class, 'index'])->name('login');
 Route::post('/loginpetugas', [LoginPetugasController::class, 'loginpetugas'])->name('login.post');
 
@@ -50,22 +46,8 @@ Route::group(['middleware' => ['auth', 'login_check'], 'prefix' => 'admin'], fun
     Route::get('/invoicedetails/{id}', [PembayaranController::class, 'invoicedetails']);
 });
 
-// Route::group(['middleware'=>['auth'],'prefix'=>'admin'], function(){
-//     Route::resource('/dashboard', DashboardController::class)->middleware('login_check');
-//     Route::resource('/siswa', SiswaController::class)->middleware('login_check');
-//     Route::resource('/petugas', PetugasController::class)->middleware('login_check');
-//     Route::resource('/kelas', KelasController::class)->middleware('login_check');
-//     Route::resource('/spp', SppController::class)->middleware('login_check');
-//     Route::resource('/pembayaran', PembayaranController::class)->middleware('login_check');
-//     Route::get('/invoicedetails/{id}',[PembayaranController::class, 'invoicedetails']);
-// });
 
 Route::group(['middleware' => ['siswa_login'], 'prefix' => 'siswa'], function () {
     Route::get('/dashboard', [SiswaDashboardController::class, 'index'])->name('siswa.dashboard');
     Route::get('/pembayaran', [SiswaPembayaranController::class, 'index'])->name('siswa.pembayaran');
 });
-
-// Route::group(['middleware'=>['siswa_login'],'prefix'=>'siswa'], function(){
-//     Route::get('/dashboard', [SiswaDashboardController::class, 'index'])->name('siswa.dashboard');
-//     Route::get('/pembayaran', [SiswaPembayaranController::class, 'index'])->name('siswa.pembayaran');
-// });

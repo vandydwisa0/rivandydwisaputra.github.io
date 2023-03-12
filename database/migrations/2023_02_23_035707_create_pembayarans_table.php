@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignId('siswa_id');
             $table->date('tgl_bayar');
             $table->foreignId('spp_id');
+            $table->string('bulan');
             $table->string('jumlah_bayar', 20);
             $table->string('status', 20);
             $table->timestamps();

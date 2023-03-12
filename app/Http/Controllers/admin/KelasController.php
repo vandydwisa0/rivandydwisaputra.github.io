@@ -4,8 +4,10 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\kelas;
+use App\Models\siswa;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -17,16 +19,13 @@ class KelasController extends Controller
      */
     public function index()
     {
-        $kelas = kelas::latest()->paginate(5);
-        return view('admin.kelas.index', compact('kelas'));
-    }
+        // $kelas = kelas::latest()->paginate(5);
+        // return view('admin.kelas.index', compact('kelas'));
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        $kelas = Kelas::latest()->filter(request(['cari']))->paginate(10);
+        return view('admin.kelas.index',
+            compact('kelas',)
+        );
     }
 
     /**
@@ -37,33 +36,25 @@ class KelasController extends Controller
         $request->validate([
             'nama_kelas' => 'required',
             'kompetensi_keahlian' => 'required',
+            'singkatan' => 'required'
         ]);
 
-        $kelas = new Kelas([
-            'nama_kelas' => $request->get('nama_kelas'),
-            'kompetensi_keahlian' => $request->get('kompetensi_keahlian'),
-            'created' => Carbon::now()
-        ]);
+        $kelas = new Kelas;
+        $kelas->nama_kelas = $request->get('nama_kelas');
+        $kelas->kompetensi_keahlian = $request->get('kompetensi_keahlian');
+        $kelas->singkatan = $request->singkatan;
+        $kelas->created = Carbon::now();
 
-        $kelas->save();
+        // dd($kelas->singkatan);
+        // $kelas = Kelas::create([
+        //     'nama_kelas' => $request->get('nama_kelas'),
+        //     'kompetensi_keahlian' => $request->get('kompetensi_keahlian'),
+        //     'created' => Carbon::now()
+        // ]);
+
+        DB::select('CALL insert_kelas(?, ?, ?, ?)', [$kelas->nama_kelas, $kelas->kompetensi_keahlian, $kelas->singkatan, Carbon::now()]);
         Alert::success('Berhasil', 'Berhasil Menambahkan Data');
         return Redirect::to("/admin/kelas")->withSuccess('Success message');
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
     }
 
     /**
@@ -74,11 +65,13 @@ class KelasController extends Controller
         $request->validate([
             'nama_kelas' => 'required|max:10',
             'kompetensi_keahlian' => 'required|max:50',
+            'singkatan' => 'required|max:10',
         ]);
 
         $kelas = Kelas::find($id);
         $kelas->nama_kelas = $request->nama_kelas;
         $kelas->kompetensi_keahlian = $request->kompetensi_keahlian;
+        $kelas->singkatan = $request->singkatan;
         $kelas->save();
         Alert::success('Success', 'Success Mengedit Data');
         return redirect('/admin/kelas')->with('success', 'Kelas berhasil diupdate!');

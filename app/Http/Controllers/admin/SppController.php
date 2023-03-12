@@ -40,10 +40,22 @@ class SppController extends Controller
             'nominal' => 'required',
         ]);
 
-        $spp = new spp([
-            'tahun' => $request->get('tahun'),
-            'nominal' => $request->get('nominal'),
-        ]);
+        // $spp = new spp([
+        //     'tahun' => $request->get('tahun'),
+        //     'nominal' => $request->get('nominal'),
+        // ]);
+
+        // Mengambil nilai nominal dari request
+        $nominal = $request->get('nominal');
+
+        // Membagi nominal dengan 12
+        $nominal_per_bulan = $nominal / 12;
+
+        $spp = new spp;
+        $spp->tahun = $request->get('tahun');
+        $spp->nominal = $request->get('nominal');
+        $spp->nominal_perbulan = $nominal_per_bulan;
+        $spp->created = Carbon::now();
 
         $spp->save();
         Alert::success('Success', 'Success Menambah Data');
@@ -88,7 +100,7 @@ class SppController extends Controller
      * Remove the specified resource from storage.
      */
     public function destroy($id)
-    {  
+    {
         $spp = Spp::findOrFail($id);
         if($spp->pembayaran->count() > 0) {
             return back();

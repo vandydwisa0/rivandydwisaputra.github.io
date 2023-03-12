@@ -14,9 +14,6 @@ class PembayaranController extends Controller
 {
     public function index()
     {
-        // $pembayaran = pembayaran::latest()->paginate(5);
-        // return view('admin.pembayaran.index', compact('pembayaran'));
-
         $siswa = siswa::latest();
         $user = User::latest()->get();
         $spp = spp::latest()->get();
@@ -33,5 +30,5 @@ class PembayaranController extends Controller
                 'pembayaranPagination' => $pembayaranPagination
             ]
         );
-    }//
+    }
 }

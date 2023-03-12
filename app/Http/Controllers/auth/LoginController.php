@@ -43,9 +43,6 @@ class LoginController extends Controller
 
             return redirect()->route('login.siswa');
         }
-
-        // Alert::warning('Gagal', 'Gagal Login');
-        // return back();
     }
 
     public function logoutsiswa(Request $request)

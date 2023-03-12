@@ -13,13 +13,11 @@ return new class extends Migration
     {
         Schema::create('log_spp', function (Blueprint $table) {
             $table->id();
-            $table->string('tahun');
-            $table->string('nominal', 20);
-            $table->string('action'); // insert, update, delete
-            $table->timestamps();
-            $table->softDeletes();
-
-            // $table->foreign('spp_id')->references('id')->on('spp')->onDelete('cascade');
+            $table->string('tahun_lama');
+            $table->string('tahun_baru');
+            $table->string('nominal_lama');
+            $table->string('nominal_baru');
+            $table->string('waktu');
         });
     }
 

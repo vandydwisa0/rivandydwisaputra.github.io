@@ -31,13 +31,6 @@ class SiswaController extends Controller
         $kelas = Kelas::latest()->get();
         return view('admin.siswa.index',
                 compact('siswa','kelas',));
-
-        // $siswa = $siswaPagination = Siswa::filter(request(['cari']))->paginate(5);
-        // $kelas = Kelas::latest()->get();
-        // // $siswaPagination = Siswa::latest()->paginate(5);
-        // return view('admin.siswa.index',
-        //         compact('siswa','kelas', 'siswaPagination'
-        // ));
     }
 
     /**
@@ -77,19 +70,6 @@ class SiswaController extends Controller
             Alert::error('Error', 'Error Menambah Data');
             return redirect(route('siswa.index'));
         }
-
-        //     $validate=$request->validate([
-        //     'nisn' => 'required|max:10|unique:siswa',
-        //     'nis' => 'required|max:8|unique:siswa',
-        //     'nama' => 'required|max:35',
-        //     'password' => 'required|',
-        //     'kelas_id' => 'required',
-        //     'no_telp' => 'required|max:13',
-        //     'alamat' => 'required|',
-        // ]);
-        // $siswa = siswa::create($validate);
-        // Alert::success('Success', 'Success Menambah Data');
-        // return redirect('/admin/siswa');
     }
 
     /**
@@ -134,15 +114,14 @@ class SiswaController extends Controller
     public function destroy(string $id)
     {
 
-        $siswa = siswa::find($id);
-        $siswa->delete();
-        Alert::success('Success', 'Success Menghapus Data');
-        return redirect('/admin/siswa');
+        $siswa = siswa::findOrFail($id);
+        if ($siswa->pembayaran->count() > 0) {
+            return back();
+        } else {
+            $siswa->delete();
+            return redirect('/admin/siswa')->with('success', 'Siswa berhasil dihapus!');
+        }
     }
-
-
-
-
 
     public function siswa()
     {

@@ -25,6 +25,11 @@ class siswa extends Model
         return $this->belongsTo(Kelas::class);
     }
 
+    public function pembayaran()
+    {
+        return $this->hasMany(pembayaran::class, 'siswa_id');
+    }
+
 
     public function scopeFilter($query,array $filters)
     {

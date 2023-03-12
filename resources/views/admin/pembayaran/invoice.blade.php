@@ -88,7 +88,7 @@
                 <p class="flex text-gray-500">Nominal</p>
                 <p class="flex ml-40 text-gray-500">:</p>
                 </div>
-                    <p class="space-x-10 ml-2">{{$item->spp->nominal}}</p>
+                    <p class="space-x-10 ml-2">{{$item->spp->nominal_perbulan}}</p>
             </div>
 
             <div class="flex items-end py-7 border-t rounded-t dark:border-gray-600">
@@ -105,18 +105,9 @@
                     {{-- <box-icon type='solid' color='white' name='printer'></box-icon> --}}
                     <a class="items-center" href="{{'invoicedetails/' . $item['id']}}">Print</a>
                 </button>
-
-</div>
-
-
-
-
-
+                </div>
                 </form>
             </div>
-            <!-- Modal footer -->
-
-
         </div>
     </div>
 </div>

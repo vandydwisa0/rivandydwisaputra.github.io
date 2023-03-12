@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('nama_kelas');
             $table->string('kompetensi_keahlian');
+            $table->string('singkatan');
+            $table->date('created');
             $table->timestamps();
         });
     }

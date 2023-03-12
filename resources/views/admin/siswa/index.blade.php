@@ -6,7 +6,7 @@
     <h1 class="mb-2 text-gray-700 font-bold text-4xl">Data Siswa</h1>
 
 <section class="bg-gray-50 dark:bg-gray-900">
-    <div class="mx-auto max-w-screen-xl">
+    <div class="flex-auto mx-auto max-w-screen-xl">
         <!-- Start coding here -->
         <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
             <div class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
@@ -29,14 +29,14 @@
 
                 </div>
             </div>
-            <div class="px-4 overflow-x-auto">
+            <div class="px-4 py-4 overflow-x-auto">
                 <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
                             <th scope="col" class="px-4 py-3">No</th>
                             <th scope="col" class="px-4 py-3">Nisn</th>
                             <th scope="col" class="px-4 py-3">Nis</th>
-                            <th scope="col" class="px-4 py-3">Nama</th>
+                            <th scope="col" class="px-1 py-3">Nama</th>
                             <th scope="col" class="px-4 py-3">Password</th>
                             <th scope="col" class="px-4 py-3">Kelas</th>
                             <th scope="col" class="px-4 py-3">No Telephone</th>
@@ -52,9 +52,9 @@
                             <th scope="row" class="px-4 py-3">{{$loop->iteration}}</th>
                             <td class="px-4 py-3">{{$item->nisn}}</td>
                             <td class="px-4 py-3">{{$item->nis}}</td>
-                            <td class="px-4 py-3">{{$item->nama}}</td>
+                            <td class="px-1 py-3">{{$item->nama}}</td>
                             <td class="px-4 py-3">{{$item->password}}</td>
-                            <td class="px-4 py-3">{{$item->kelas->nama_kelas}} - {{$item->kelas->kompetensi_keahlian}}</td>
+                            <td class="px-4 py-3">{{$item->kelas->nama_kelas}} - {{$item->kelas->singkatan}}</td>
                             <td class="px-4 py-3">{{$item->no_telp}}</td>
                             <td class="px-4 py-3">{{$item->alamat}}</td>
                             <td class="flex px-6 py-4 items-center justify-center">

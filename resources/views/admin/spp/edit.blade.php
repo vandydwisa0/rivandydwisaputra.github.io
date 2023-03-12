@@ -34,13 +34,8 @@
                     <div class="grid gap-6 mb-6 md:grid-rows-2">
                         <div>
                             <label for="tahun" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tahun</label>
-                                <select id="tahun" name="tahun" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-cyan-500 focus:border-cyan-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-cyan-500 dark:focus:border-cyan-500" required>
-                                    <option value="" selected>Pilih Tahun</option>
-                                    <option value="2020" {{$item->tahun == '2020' ? 'selected' : ''}}>2020</option>
-                                    <option value="2021" {{$item->tahun == '2021' ? 'selected' : ''}}>2021</option>
-                                    <option value="2022" {{$item->tahun == '2022' ? 'selected' : ''}}>2022</option>
-                                    <option value="2023" {{$item->tahun == '2023' ? 'selected' : ''}}>2023</option>
-                                </select>
+                            <input type="number" name="tahun" id="tahun" value="{{$item->tahun}}"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-cyan-500 focus:border-cyan-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-cyan-500 dark:focus:border-cyan-500" placeholder="Masukan nama anda..." required>
                         </div>
                         <div>
                             <label for="nominal" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nominal</label>

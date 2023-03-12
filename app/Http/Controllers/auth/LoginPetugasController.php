@@ -7,14 +7,15 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
 
+
 class LoginPetugasController extends Controller
 {
     public function index()
     {
-        if($petugas=Auth::user()){
-            if($petugas->level=='admin'){
+        if ($petugas = Auth::user()) {
+            if ($petugas->level == 'admin') {
                 return redirect()->route('dashboard.index');
-            }elseif($petugas->level=='petugas'){
+            } elseif ($petugas->level == 'petugas') {
                 return redirect()->route('dashboard.index');
             }
         } else if (session()->has('siswa')) {
@@ -26,26 +27,26 @@ class LoginPetugasController extends Controller
     public function loginpetugas(Request $request)
     {
         $validate = $request->validate([
-            'username'=>'required',
-            'password'=>'required',
+            'username' => 'required',
+            'password' => 'required',
         ]);
 
-        if(Auth::attempt($validate)){
+        if (Auth::attempt($validate)) {
             $petugas = Auth::user();
 
-            if($petugas->level=='admin'){
+            if ($petugas->level == 'admin') {
                 Alert::success('Berhasil', 'Berhasil Login');
                 return redirect()->intended(route('dashboard.index'));
-            }elseif($petugas->level=='petugas'){
+            } elseif ($petugas->level == 'petugas') {
                 Alert::success('Berhasil', 'Berhasil Login');
                 return redirect()->intended(route('dashboard.index'));
-            }else{
+            } else {
                 Alert::warning('Gagal', 'Coba cek kembali nisn atau password');
                 return redirect()->intended('/');
             }
         }
-        Alert::warning('Gagal', 'Coba cek kembali nisn atau password');
-        return redirect()->route('login')->withInput()->withErrors(['status'=>'failed']);
+        Alert::warning('Gagal', 'Coba cek kembali username atau password');
+        return redirect()->route('login')->withInput()->withErrors(['status' => 'failed']);
     }
 
     public function logoutpetugas(Request $request)

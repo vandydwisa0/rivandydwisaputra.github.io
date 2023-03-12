@@ -14,7 +14,9 @@ return new class extends Migration
         Schema::create('spp', function (Blueprint $table) {
             $table->id();
             $table->string('tahun');
-            $table->string('nominal', 20);
+            $table->string('nominal');
+            $table->string('nominal_perbulan');
+            $table->date('created');
             $table->timestamps();
         });
     }

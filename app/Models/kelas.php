@@ -11,9 +11,12 @@ class kelas extends Model
     use HasFactory;
 
     protected $table = 'kelas';
+    public $timestamps = false;
     protected $fillable = [
         'nama_kelas',
         'kompetensi_keahlian',
+        'singkatan',
+        'created'
     ];
 
     // Accessor untuk format tanggal dibuat
@@ -25,5 +28,14 @@ class kelas extends Model
     public function siswa()
     {
         return $this->hasMany(Siswa::class);
+    }
+
+    public function scopeFilter($query, array $filters)
+    {
+        $query->when($filters['cari'] ?? false, function ($query, $cari) {
+            return $query->when(function ($query) use ($cari) {
+                $query->where('nama_kelas', 'like', '%' . $cari . '%')->orWhere('singkatan', 'like', '%' . $cari . '%');
+            });
+        });
     }
 }

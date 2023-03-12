@@ -34,6 +34,22 @@
                     <div class="grid gap-6 mb-6 md:grid-rows-2">
                         <div>
                             <label for="nama_kelas" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kelas</label>
+                            <input type="text" name="nama_kelas" id="nama_kelas" value=""
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-cyan-500 focus:border-cyan-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-cyan-500 dark:focus:border-cyan-500" placeholder="Masukan nama anda..." required>
+                        </div>
+                        <div>
+                            <label for="kompetensi_keahlian" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jurusan</label>
+                            <input type="text" name="kompetensi_keahlian" id="kompetensi_keahlian" value=""
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-cyan-500 focus:border-cyan-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-cyan-500 dark:focus:border-cyan-500" placeholder="Masukan nama anda..." required>
+                        </div>
+                        <div>
+                            <label for="singkatan" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Singkatan</label>
+                            <input type="text" name="singkatan" id="singkatan" value=""
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-cyan-500 focus:border-cyan-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-cyan-500 dark:focus:border-cyan-500" placeholder="Masukan nama anda..." required>
+                        </div>
+
+                        {{-- <div>
+                            <label for="nama_kelas" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kelas</label>
                                 <select id="nama_kelas" name="nama_kelas" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-cyan-500 focus:border-cyan-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-cyan-500 dark:focus:border-cyan-500" required>
                                     <option value="" selected>Pilih Kelas</option>
                                     <option value="13">13</option>
@@ -42,8 +58,8 @@
                                     <option value="10">10</option>
 
                                 </select>
-                        </div>
-                        <div>
+                        </div> --}}
+                        {{-- <div>
                             <label for="kompetensi_keahlian" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jurusan</label>
                                 <select id="kompetensi_keahlian" name="kompetensi_keahlian" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-cyan-500 focus:border-cyan-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-cyan-500 dark:focus:border-cyan-500" required>
                                     <option value="" selected>Pilih Jurusan</option>
@@ -57,7 +73,7 @@
                                     <option value="ELECTRO">Electro</option>
                                     <option value="TGM">Teknik Gambar Mesin</option>
                                 </select>
-                        </div>
+                        </div> --}}
                     </div>
                     <!-- Modal footer -->
                     <div class="flex items-end justify-end pt-5 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">

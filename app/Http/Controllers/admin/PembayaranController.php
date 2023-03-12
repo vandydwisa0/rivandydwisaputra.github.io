@@ -60,14 +60,17 @@ class PembayaranController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->bulan);
+        $request->validate([
+            'bulan' => 'required',
+        ]);
+
         $spp = spp::where('id', $request->spp_id)->First();
-        if($request->jumlah_bayar >= $spp->nominal){
+        if($request->jumlah_bayar >= $spp->nominal_perbulan){
             $status = 'lunas';
         }else{
             $status = 'belum lunas';
         }
-
-
 
         DB::beginTransaction();
         try {
@@ -76,6 +79,7 @@ class PembayaranController extends Controller
                 'siswa_id' => $request->siswa_id,
                 'spp_id' => $request->spp_id,
                 'users_id' => Auth::user()->id,
+                'bulan' => $request->bulan,
                 'jumlah_bayar' => $request->jumlah_bayar,
                 'status' => $status,
                 'tgl_bayar' => Carbon::now()
@@ -147,7 +151,7 @@ class PembayaranController extends Controller
         // dd($id);
         $pembayaran = pembayaran::find($id);
         $pembayaran->jumlah_bayar = $request->jumlah_bayar;
-        $pembayaran->status = $request->jumlah_bayar >= $pembayaran->spp->nominal ? 'lunas' : 'belum lunas';
+        $pembayaran->status = $request->jumlah_bayar >= $pembayaran->spp->nominal_perbulan ? 'lunas' : 'belum lunas';
         $pembayaran->save();
         Alert::success('Berhasil', 'Berhasil Mengedit Data');
         return redirect('/admin/pembayaran')->with('success', 'Pembayaran berhasil diupdate!');

@@ -15,6 +15,8 @@ class spp extends Model
     protected $fillable = [
         'tahun',
         'nominal',
+        'nominal_perbulan',
+        'created'
     ];
     // Accessor untuk format tanggal dibuat
     public function getCreatedAttribute($value)
@@ -25,4 +27,5 @@ class spp extends Model
     public function pembayaran() {
         return $this->hasMany(Pembayaran::class);
     }
+
 }
