@@ -105,7 +105,7 @@ class SiswaController extends Controller
 
         $siswa = siswa::find($id);
         if($siswa->pembayaran->count() > 0) {
-            Alert::info('Tidak Bisa Diedit', 'Data sedang digunakan!');
+            Alert::info('Tidak Bisa Melakukan Edit', 'Data sedang digunakan!');
             return back();
         }else{
         $siswa->update($validate);
@@ -122,7 +122,7 @@ class SiswaController extends Controller
 
         $siswa = siswa::findOrFail($id);
         if ($siswa->pembayaran->count() > 0) {
-            Alert::info('Tidak Bisa Diedit', 'Data sedang digunakan!');
+            Alert::info('Tidak Bisa Melakukan Hapus', 'Data sedang digunakan!');
             return back();
         } else {
             $siswa->delete();

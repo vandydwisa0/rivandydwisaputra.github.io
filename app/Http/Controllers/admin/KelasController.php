@@ -68,7 +68,7 @@ class KelasController extends Controller
         $kelas->singkatan = $request->singkatan;
 
         if ($kelas->siswa->count() > 0) {
-            Alert::info('Tidak Bisa Diedit', 'Data sedang digunakan!');
+            Alert::info('Tidak Bisa Melakukan Edit', 'Data sedang digunakan!');
             return back();
         } else {
             $kelas->save();
@@ -88,6 +88,7 @@ class KelasController extends Controller
     {
         $kelas = kelas::findOrFail($id);
         if ($kelas->siswa->count() > 0) {
+            Alert::info('Tidak Bisa Melakukan Hapus', 'Data sedang digunakan!');
             return back();
         } else {
             $kelas->delete();

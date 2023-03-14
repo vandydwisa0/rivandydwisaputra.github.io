@@ -56,7 +56,7 @@
                             <th scope="row" class="px-4 py-3">{{$loop->iteration}}</th>
                             <td class="py-3">{{$item->siswa->nama}}</td>
                             <td class="py-3">{{$item->siswa->kelas->nama_kelas}} - {{$item->siswa->kelas->singkatan}}</td>
-                            <td class="py-3">{{$item->spp->tahun}}</td>
+                            <td class="px-3 py-3">{{$item->spp->tahun}}</td>
                             <td class="py-3">{{$item->bulan}}</td>
                             <td class="py-3">Rp {{$item->spp->nominal_perbulan}}</td>
                             <td class="py-3">Rp {{$item->jumlah_bayar}}</td>
@@ -67,7 +67,7 @@
                                 @include('admin.pembayaran.edit')
                                 @include('admin.pembayaran.delete')
                                 @else
-                                @include('admin.pembayaran.edit')
+                                {{-- @include('admin.pembayaran.edit') --}}
                                 @include('admin.pembayaran.invoice')
                                 @include('admin.pembayaran.delete')
                                 @endif

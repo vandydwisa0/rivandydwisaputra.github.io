@@ -32,13 +32,14 @@
                         <div class="grid gap-4  sm:grid-cols-2">
                         <div>
                             <label for="siswa_id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama Siswa</label>
-                                <select name="siswa_id" id="siswa_id"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
+                            <select name="siswa_id" id="siswa_id" class="select2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required data-live-search="true">
+                                <option value="" selected>Pilih Siswa</option>
                                 @foreach ($siswa as $item)
                                 <option value="{{$item->id}}">{{$item->nama}}</option>
                                 @endforeach
                             </select>
                         </div>
+
                         <div>
                             <label for="spp_id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tahun Spp</label>
                                 <select name="spp_id" id="spp_id"
@@ -102,3 +103,38 @@
         </div>
     </div>
 </div>
+
+
+
+{{-- untuk select siswa agar bisa melakukan search --}}
+<script>
+$(document).ready(function() {
+    $('#siswa_id').select2({
+        placeholder: 'Pilih Nama Siswa',
+        tags: true, // menampilkan inputan user yang tidak ada dalam daftar pilihan
+        tokenSeparators: [' '], // memungkinkan user untuk memasukkan opsi yang dipisahkan oleh spasi
+        ajax: {
+            url: '/search/siswa',
+            dataType: 'json',
+            delay: 250,
+            data: function(params) {
+                return {
+                    search: params.term // term adalah nilai keyword search yang dimasukkan user
+                };
+            },
+            processResults: function(data) {
+                return {
+                    results: $.map(data, function(item) {
+                        return {
+                            text: item.nama,
+                            id: item.id
+                        }
+                    })
+                };
+            },
+            cache: true
+        }
+    });
+});
+</script>
+

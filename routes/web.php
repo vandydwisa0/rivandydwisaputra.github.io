@@ -43,6 +43,7 @@ Route::group(['middleware' => ['auth', 'login_check'], 'prefix' => 'admin'], fun
     Route::resource('/kelas', KelasController::class)->middleware('admin_check');
     Route::resource('/spp', SppController::class)->middleware('admin_check');
     Route::resource('/pembayaran', PembayaranController::class);
+    Route::get('/search/siswa', [PembayaranController::class, 'searchSiswa'])->name('pembayaran.search_siswa');
     Route::get('/invoicedetails/{id}', [PembayaranController::class, 'invoicedetails']);
 });
 

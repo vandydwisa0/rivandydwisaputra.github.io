@@ -3,6 +3,11 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\kelas;
+use App\Models\pembayaran;
+use App\Models\siswa;
+use App\Models\spp;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -12,7 +17,13 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        return view('admin.dashboard.index');
+        return view('admin.dashboard.index', [
+            'jumlah_siswa' => siswa::all()->count(),
+            'jumlah_petugas' => User::all()->count(),
+            'jumlah_kelas' => kelas::all()->count(),
+            'jumlah_spp' => spp::all()->count(),
+            'jumlah_pembayaran' => pembayaran::all()->count(),
+        ]);
     }
 
     /**

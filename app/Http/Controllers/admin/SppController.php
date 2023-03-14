@@ -101,7 +101,7 @@ class SppController extends Controller
         $spp->nominal_perbulan = $nominal_per_bulan;
 
         if($spp->pembayaran->count() > 0) {
-            Alert::info('Informasi', 'Data sedang digunakan');
+            Alert::info('Tidak Bisa Melakukan Edit', 'Data sedang digunakan!');
             return back();
         }else{
             $spp->save();
@@ -120,6 +120,7 @@ class SppController extends Controller
     {
         $spp = Spp::findOrFail($id);
         if($spp->pembayaran->count() > 0) {
+            Alert::info('Tidak Bisa Melakukan Hapus', 'Data sedang digunakan!');
             return back();
         }else{
             $spp->delete();

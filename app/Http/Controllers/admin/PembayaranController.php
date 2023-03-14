@@ -61,7 +61,6 @@ class PembayaranController extends Controller
      */
     public function store(Request $request)
     {
-
         $request->validate([
             'siswa_id' => 'required',
             'spp_id' => 'required',
@@ -69,30 +68,32 @@ class PembayaranController extends Controller
             'jumlah_bayar' => 'required',
         ]);
 
-
         // Cek apakah siswa tersebut sudah melakukan pembayaran di bulan yang sama
         $pembayaran = pembayaran::where('siswa_id', $request->siswa_id)
-        ->where('bulan', $request->bulan)
-        ->first();
+            ->where('bulan', $request->bulan)
+            ->first();
 
         if ($pembayaran) {
             Alert::warning('Warning', 'Pembayaran sudah dilakukan di bulan yang sama');
             return redirect()->back();
         }
 
-        // Cek apakah status pembayaran siswa bulan_sebelumnya sudah lunas? kalo lunas bisa melakukan pembayaran bulan selanjutnya tapi jika belum maka akan di minta untuk melunasi dulu
+        // Cek apakah tagihan pada bulan sebelumnya sudah lunas
         $bulan_sebelumnya = Carbon::parse($request->bulan)->subMonth()->format('F');
         $tagihan_sebelumnya = Pembayaran::where('siswa_id', $request->siswa_id)
         ->where('bulan', $bulan_sebelumnya)
         ->first();
+
+        $spp = Spp::find($request->spp_id);
+
         if ($tagihan_sebelumnya && $tagihan_sebelumnya->status != 'lunas') {
-            Alert::info('Informasi', 'Anda belum melunasi tagihan pada bulan ' . Carbon::parse($bulan_sebelumnya)->format('F') . ' . Silakan lunasi terlebih dahulu.');
+            $jumlah_bayar = $spp->nominal_perbulan - $tagihan_sebelumnya->jumlah_bayar;
+            Alert::info('Informasi', 'Anda belum melunasi tagihan pada bulan ' . Carbon::parse($bulan_sebelumnya)->format('F') . '. Silakan lunasi terlebih dahulu senilai Rp ' . $jumlah_bayar . ' pada bulan tersebut.');
             return redirect()->back();
         }
 
         // untuk menentukan status "lunas" "belum lunas" sesuai nominal spp perbulannya
         $spp = spp::where('id', $request->spp_id)->first();
-
         $status = $request->jumlah_bayar >= $spp->nominal_perbulan ? 'lunas' : 'belum lunas';
 
         DB::beginTransaction();
@@ -125,6 +126,7 @@ class PembayaranController extends Controller
             return redirect(route('pembayaran.index'));
         }
     }
+
 
     /**
      * Display the specified resource.
@@ -184,4 +186,12 @@ class PembayaranController extends Controller
             compact('siswa', 'user', 'spp', 'pembayaran')
         );
     }
+ 
+
+    public function searchSiswa(Request $request)
+    {
+        $siswa = Siswa::where('nama', 'like', '%' . $request->search . '%')->get();
+        return response()->json($siswa);
+    }
 }
+

@@ -28,6 +28,7 @@ class pembayaran extends Model
         return $this->belongsTo(Spp::class);
     }
 
+
     // Accessor untuk format tanggal dibuat
     public function getCreatedAttribute($value)
     {

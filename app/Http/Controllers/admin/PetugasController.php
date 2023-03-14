@@ -91,6 +91,7 @@ class PetugasController extends Controller
 
         // dd($petugas->pembayaran->count());
         if ($petugas->pembayaran->count() > 0) {
+            Alert::info('Tidak Bisa Melakukan Hapus', 'Data sedang digunakan!');
             return back();
         } else {
             $petugas->destroy($id);
