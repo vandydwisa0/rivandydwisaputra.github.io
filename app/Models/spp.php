@@ -25,8 +25,13 @@ class spp extends Model
         return Carbon::parse($value)->format('d M Y');
     }
 
+    public function spp()
+    {
+        return $this->belongsTo(Spp::class);
+    }
+
     public function pembayaran() {
-        return $this->hasMany(Pembayaran::class);
+        return $this->hasMany(Pembayaran::class, 'spp_id');
     }
 }
 

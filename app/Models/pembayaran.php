@@ -38,8 +38,11 @@ class pembayaran extends Model
     {
         $query->when($filters['cari'] ?? false, function ($query, $cari) {
             return $query->whereHas('siswa', function ($query) use ($cari) {
-                $query->where('nama', 'like', '%' . $cari . '%')->orWhere('nisn', 'like', '%' . $cari . '%');
+                $query->where('nama', 'like', '%' . $cari . '%');
+            })->orWhereHas('spp', function ($query) use ($cari) {
+                $query->where('tahun', 'like', '%' . $cari . '%');
             });
+
         });
     }
 

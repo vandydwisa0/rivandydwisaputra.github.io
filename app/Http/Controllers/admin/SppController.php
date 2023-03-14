@@ -19,7 +19,7 @@ class SppController extends Controller
      */
     public function index()
     {
-        $spp = spp::latest()->paginate(5);
+        $spp = spp::latest()->paginate(10);
         return view('admin.spp.index', compact('spp'));
     }
 

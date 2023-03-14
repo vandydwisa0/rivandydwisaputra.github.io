@@ -30,7 +30,7 @@ class PembayaranController extends Controller
         $siswa = siswa::latest()->get();
         $user = User::latest()->get();
         $spp = spp::latest()->get();
-        $pembayaran = pembayaran::filter(request(['cari']))->paginate(5);
+        $pembayaran = pembayaran::filter(request(['cari']))->paginate(10);
         return view(
             'admin.pembayaran.index',
             compact('siswa', 'user', 'spp', 'pembayaran')

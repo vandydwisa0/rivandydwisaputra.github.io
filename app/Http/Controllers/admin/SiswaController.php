@@ -27,7 +27,7 @@ class SiswaController extends Controller
         // return view('admin.siswa.index', compact('siswa'));
 
 
-        $siswa = Siswa::filter(request(['cari']))->paginate(5);
+        $siswa = Siswa::filter(request(['cari']))->paginate(10);
         $kelas = Kelas::latest()->get();
         return view('admin.siswa.index',
                 compact('siswa','kelas',));

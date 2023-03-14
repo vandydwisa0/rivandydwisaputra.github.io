@@ -17,7 +17,7 @@ class PetugasController extends Controller
     public function index()
     {
 
-        $petugas = User::latest()->paginate(5);
+        $petugas = User::latest()->paginate(10);
         return view('admin.petugas.index', compact('petugas'));
     }
 
