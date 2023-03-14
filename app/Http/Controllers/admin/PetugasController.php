@@ -68,19 +68,18 @@ class PetugasController extends Controller
      */
     public function update(Request $request, User $id)
     {
-        $rules = [
-            'nama_petugas' => 'required|max:35',
-            'level' => 'required'
-        ];
+        // $rules = [
+        //     'nama_petugas' => 'required|max:35',
+        // ];
 
-        if($request->username !== $id->username) {
-            $rules['username'] = 'required|unique:users|max:25';
-        }
+        // if($request->username !== $id->username) {
+        //     $rules['username'] = 'required|unique:users|max:25';
+        // }
 
-        $validateData = $request->validate($rules);
-        User::find($id)->update($validateData);
-        Alert::success('Success', 'Success Mengedit Data');
-        return redirect('/admin/petugas');
+        // $validateData = $request->validate($rules);
+        // User::find($id)->update($validateData);
+        // Alert::success('Success', 'Success Mengedit Data');
+        // return redirect('/admin/petugas');
     }
 
     /**

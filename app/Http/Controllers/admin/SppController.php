@@ -99,11 +99,18 @@ class SppController extends Controller
         $spp->tahun = $request->tahun;
         $spp->nominal = $request->nominal;
         $spp->nominal_perbulan = $nominal_per_bulan;
-        $spp->save();
+
+        if($spp->pembayaran->count() > 0) {
+            Alert::info('Informasi', 'Data sedang digunakan');
+            return back();
+        }else{
+            $spp->save();
+            Alert::success('Success', 'Success Mengedit Data');
+            return redirect('/admin/spp');
+        }
+
         // Update status pembayaran siswa
-        DB::select('CALL update_status_pembayaran(?)', [$id]);
-        Alert::success('Success', 'Success Mengedit Data');
-        return redirect('/admin/spp');
+        // DB::select('CALL update_status_pembayaran(?)', [$id]);
     }
 
     /**

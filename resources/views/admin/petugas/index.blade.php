@@ -42,7 +42,7 @@
                             <td class="px-4 py-3">{{ $item->nama_petugas }}</td>
                             <td class="px-4 py-3">{{ $item->level }}</td>
                             <td class="flex px-6 py-4 items-center justify-center">
-                                @include('admin.petugas.edit')
+                                {{-- @include('admin.petugas.edit') --}}
                                 @include('admin.petugas.delete')
                             </td>
                         </tr>

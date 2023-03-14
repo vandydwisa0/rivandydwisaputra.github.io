@@ -45,7 +45,7 @@ class KelasController extends Controller
         $kelas->singkatan = $request->singkatan;
         $kelas->created = Carbon::now();
 
-        //  store
+        //  store procedure
         DB::select('CALL insert_kelas(?, ?, ?, ?)', [$kelas->nama_kelas, $kelas->kompetensi_keahlian, $kelas->singkatan, Carbon::now()]);
         Alert::success('Berhasil', 'Berhasil Menambahkan Data');
         return Redirect::to("/admin/kelas");
@@ -66,9 +66,19 @@ class KelasController extends Controller
         $kelas->nama_kelas = $request->nama_kelas;
         $kelas->kompetensi_keahlian = $request->kompetensi_keahlian;
         $kelas->singkatan = $request->singkatan;
-        $kelas->save();
-        Alert::success('Success', 'Success Mengedit Data');
-        return redirect('/admin/kelas')->with('success', 'Kelas berhasil diupdate!');
+
+        if ($kelas->siswa->count() > 0) {
+            Alert::info('Tidak Bisa Diedit', 'Data sedang digunakan!');
+            return back();
+        } else {
+            $kelas->save();
+            Alert::success('Success', 'Success Mengedit Data!');
+            return redirect('/admin/kelas');
+        }
+
+        // $kelas->save();
+        // Alert::success('Success', 'Success Mengedit Data!');
+        // return redirect('/admin/kelas');
     }
 
     /**

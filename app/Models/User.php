@@ -30,6 +30,7 @@ class User extends Authenticatable
         return $this->hasMany(Pembayaran::class, 'users_id');
     }
 
+
     /**
      * The attributes that should be hidden for serialization.
      *

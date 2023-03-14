@@ -1,4 +1,4 @@
-<div class="block space-y-4 md:flex md:space-y-0 md:space-x-4">
+{{-- <div class="block space-y-4 md:flex md:space-y-0 md:space-x-4">
     <!-- Modal toggle -->
 
     <form action="/admin/petugas/{{ $item->id }}/edit/" class="badge bg-warning" method="POST">
@@ -43,15 +43,6 @@
                             <input type="text" name="username" id="username" value="{{$item->username}}"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-cyan-500 focus:border-cyan-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-cyan-500 dark:focus:border-cyan-500" placeholder="Masukan nis anda..." required>
                         </div>
-                        <div>
-                            <label for="level" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Level</label>
-                                <select name="level" id="level" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-cyan-500 focus:border-cyan-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-cyan-500 dark:focus:border-cyan-500" required>
-                                    <option value="" selected>Pilih Level</option>
-                                    {{-- <option value="admin" {{ $item->level == 'admin' ? 'selected' : ''}}>Admin</option> --}}
-                                    <option value="petugas" {{ $item->level == 'petugas' ? 'selected' : ''}}>Petugas</option>
-                                </select>
-
-                        </div>
                     </div>
                     <!-- Modal footer -->
                     <div class="flex items-end justify-end pt-5 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
@@ -68,4 +59,4 @@
         document.getElementById('edit').reset()
     }
 </script>
-
+ --}}

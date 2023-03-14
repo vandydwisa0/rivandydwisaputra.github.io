@@ -103,9 +103,15 @@ class SiswaController extends Controller
             'alamat' => 'required',
         ]);
 
-        $siswa = siswa::find($id)->update($validate);
+        $siswa = siswa::find($id);
+        if($siswa->pembayaran->count() > 0) {
+            Alert::info('Tidak Bisa Diedit', 'Data sedang digunakan!');
+            return back();
+        }else{
+        $siswa->update($validate);
         Alert::success('Success', 'Success Mengedit Data');
         return redirect('/admin/siswa');
+        }
     }
 
     /**
@@ -116,6 +122,7 @@ class SiswaController extends Controller
 
         $siswa = siswa::findOrFail($id);
         if ($siswa->pembayaran->count() > 0) {
+            Alert::info('Tidak Bisa Diedit', 'Data sedang digunakan!');
             return back();
         } else {
             $siswa->delete();

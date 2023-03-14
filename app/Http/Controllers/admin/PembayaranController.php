@@ -156,7 +156,7 @@ class PembayaranController extends Controller
         $pembayaran->status = $request->jumlah_bayar >= $pembayaran->spp->nominal_perbulan ? 'lunas' : 'belum lunas';
         $pembayaran->save();
 
-        DB::statement('CALL update_status_pembayaran(' . $pembayaran->spp_id . ')');
+        // DB::statement('CALL update_status_pembayaran(' . $pembayaran->spp_id . ')');
 
         Alert::success('Berhasil', 'Berhasil Mengedit Data');
         return redirect('/admin/pembayaran')->with('success', 'Pembayaran berhasil diupdate!');
