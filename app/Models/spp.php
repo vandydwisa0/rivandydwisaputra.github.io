@@ -5,6 +5,7 @@ namespace App\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Observers\SppObserver;
 
 class spp extends Model
 {
@@ -27,5 +28,5 @@ class spp extends Model
     public function pembayaran() {
         return $this->hasMany(Pembayaran::class);
     }
-
 }
+

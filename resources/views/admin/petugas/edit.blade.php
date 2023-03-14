@@ -47,7 +47,7 @@
                             <label for="level" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Level</label>
                                 <select name="level" id="level" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-cyan-500 focus:border-cyan-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-cyan-500 dark:focus:border-cyan-500" required>
                                     <option value="" selected>Pilih Level</option>
-                                    <option value="admin" {{ $item->level == 'admin' ? 'selected' : ''}}>Admin</option>
+                                    {{-- <option value="admin" {{ $item->level == 'admin' ? 'selected' : ''}}>Admin</option> --}}
                                     <option value="petugas" {{ $item->level == 'petugas' ? 'selected' : ''}}>Petugas</option>
                                 </select>
 

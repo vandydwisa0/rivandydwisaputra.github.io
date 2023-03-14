@@ -14,6 +14,7 @@ use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\Rule;
 
 class PembayaranController extends Controller
 {
@@ -60,21 +61,43 @@ class PembayaranController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->bulan);
+
         $request->validate([
+            'siswa_id' => 'required',
+            'spp_id' => 'required',
             'bulan' => 'required',
+            'jumlah_bayar' => 'required',
         ]);
 
-        $spp = spp::where('id', $request->spp_id)->First();
-        if($request->jumlah_bayar >= $spp->nominal_perbulan){
-            $status = 'lunas';
-        }else{
-            $status = 'belum lunas';
+
+        // Cek apakah siswa tersebut sudah melakukan pembayaran di bulan yang sama
+        $pembayaran = pembayaran::where('siswa_id', $request->siswa_id)
+        ->where('bulan', $request->bulan)
+        ->first();
+
+        if ($pembayaran) {
+            Alert::warning('Warning', 'Pembayaran sudah dilakukan di bulan yang sama');
+            return redirect()->back();
         }
 
-        DB::beginTransaction();
-        try {
+        // Cek apakah status pembayaran siswa bulan_sebelumnya sudah lunas? kalo lunas bisa melakukan pembayaran bulan selanjutnya tapi jika belum maka akan di minta untuk melunasi dulu
+        $bulan_sebelumnya = Carbon::parse($request->bulan)->subMonth()->format('F');
+        $tagihan_sebelumnya = Pembayaran::where('siswa_id', $request->siswa_id)
+        ->where('bulan', $bulan_sebelumnya)
+        ->first();
+        if ($tagihan_sebelumnya && $tagihan_sebelumnya->status != 'lunas') {
+            Alert::info('Informasi', 'Anda belum melunasi tagihan pada bulan ' . Carbon::parse($bulan_sebelumnya)->format('F') . ' . Silakan lunasi terlebih dahulu.');
+            return redirect()->back();
+        }
 
+        // untuk menentukan status "lunas" "belum lunas" sesuai nominal spp perbulannya
+        $spp = spp::where('id', $request->spp_id)->first();
+
+        $status = $request->jumlah_bayar >= $spp->nominal_perbulan ? 'lunas' : 'belum lunas';
+
+        DB::beginTransaction();
+
+        try {
             $pembayaran = pembayaran::create([
                 'siswa_id' => $request->siswa_id,
                 'spp_id' => $request->spp_id,
@@ -82,44 +105,25 @@ class PembayaranController extends Controller
                 'bulan' => $request->bulan,
                 'jumlah_bayar' => $request->jumlah_bayar,
                 'status' => $status,
-                'tgl_bayar' => Carbon::now()
+                'tgl_bayar' => Carbon::now(),
             ]);
 
-            // dd($pembayaran);
             $pembayaran->spp()->associate($request->spp_id);
 
-            $P =$pembayaran->users()->associate(Auth::user()->id);
-            // dd($P);
+            // nama petugas saat melakukan pembayaran di sesuaikan dengan auth petugas yang login
+            $pembayaran->users()->associate(Auth::user()->id);
 
             DB::commit();
+
             Alert::success('Berhasil', 'Berhasil Menambah Data');
+
             return redirect(route('pembayaran.index'));
         } catch (Exception $e) {
             DB::rollBack();
+
             Alert::error('Error', 'Error Menambah Data');
             return redirect(route('pembayaran.index'));
         }
-
-        // $request->validate([
-        //     'siswa_id' => 'required',
-        //     'spp_id' => 'required',
-        //     'users_id' => 'required',
-        //     'jumlah_bayar' => 'required',
-        //     'status' => 'required',
-        // ]);
-
-        // $pembayaran = new pembayaran([
-        //     'siswa_id' => $request->get('siswa_id'),
-        //     'spp_id' => $request->get('spp_id'),
-        //     'users_id' => $request->get('users_id'),
-        //     'jumlah_bayar' => $request->get('jumlah_bayar'),
-        //     'status' => $request->get('status'),
-        //     'tgl_bayar' => Carbon::now()
-        // ]);
-
-        // $pembayaran->save();
-        // Alert::success('Berhasil', 'Berhasil Menambahkan Data');
-        // return redirect('/admin/pembayaran');
     }
 
     /**
@@ -146,13 +150,14 @@ class PembayaranController extends Controller
         $request->validate([
             'jumlah_bayar' => 'required',
         ]);
-        // $spp = spp::where('id', $request->spp_id)->First();
 
-        // dd($id);
-        $pembayaran = pembayaran::find($id);
+        $pembayaran = Pembayaran::find($id);
         $pembayaran->jumlah_bayar = $request->jumlah_bayar;
         $pembayaran->status = $request->jumlah_bayar >= $pembayaran->spp->nominal_perbulan ? 'lunas' : 'belum lunas';
         $pembayaran->save();
+
+        DB::statement('CALL update_status_pembayaran(' . $pembayaran->spp_id . ')');
+
         Alert::success('Berhasil', 'Berhasil Mengedit Data');
         return redirect('/admin/pembayaran')->with('success', 'Pembayaran berhasil diupdate!');
     }

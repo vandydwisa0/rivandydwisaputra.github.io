@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\pembayaran;
 use App\Models\spp;
 use Carbon\Carbon;
 use Exception;
@@ -88,12 +89,21 @@ class SppController extends Controller
             'nominal' => 'required'
         ]);
 
+        // Mengambil nilai nominal dari request
+        $nominal = $request->get('nominal');
+
+        // Membagi nominal dengan 12
+        $nominal_per_bulan = $nominal / 12;
+
         $spp = Spp::findOrFail($id);
         $spp->tahun = $request->tahun;
         $spp->nominal = $request->nominal;
+        $spp->nominal_perbulan = $nominal_per_bulan;
         $spp->save();
+        // Update status pembayaran siswa
+        DB::select('CALL update_status_pembayaran(?)', [$id]);
         Alert::success('Success', 'Success Mengedit Data');
-        return redirect('/admin/spp')->with('success', 'Spp berhasil diupdate!');
+        return redirect('/admin/spp');
     }
 
     /**

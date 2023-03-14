@@ -45,16 +45,10 @@ class KelasController extends Controller
         $kelas->singkatan = $request->singkatan;
         $kelas->created = Carbon::now();
 
-        // dd($kelas->singkatan);
-        // $kelas = Kelas::create([
-        //     'nama_kelas' => $request->get('nama_kelas'),
-        //     'kompetensi_keahlian' => $request->get('kompetensi_keahlian'),
-        //     'created' => Carbon::now()
-        // ]);
-
+        //  store
         DB::select('CALL insert_kelas(?, ?, ?, ?)', [$kelas->nama_kelas, $kelas->kompetensi_keahlian, $kelas->singkatan, Carbon::now()]);
         Alert::success('Berhasil', 'Berhasil Menambahkan Data');
-        return Redirect::to("/admin/kelas")->withSuccess('Success message');
+        return Redirect::to("/admin/kelas");
     }
 
     /**

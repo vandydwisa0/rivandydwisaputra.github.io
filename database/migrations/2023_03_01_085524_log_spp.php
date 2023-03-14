@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('tahun_baru');
             $table->string('nominal_lama');
             $table->string('nominal_baru');
+            $table->string('nominal_perbulan_lama');
+            $table->string('nominal_perbulan_baru');
             $table->string('waktu');
         });
     }

@@ -49,7 +49,7 @@
                             </select>
                         </div>
                         </div>
-                        <div>
+                        {{-- <div>
                             <label for="users_id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Petugas</label>
                                 <select name="users_id" id="users_id"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
@@ -58,23 +58,23 @@
                                 <option value="{{ $item->id }}" hidden></option>
                                 @endforeach
                             </select>
-                        </div>
+                        </div> --}}
                         <div>
                             <label for="bulan" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Bulan</label>
                                 <select id="bulan" name="bulan" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-cyan-500 focus:border-cyan-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-cyan-500 dark:focus:border-cyan-500" required>
                                     <option value="" selected>Pilih Bulan</option>
-                                    <option value="Januari">Januari</option>
-                                    <option value="Febuari">Febuari</option>
-                                    <option value="Maret">Maret</option>
-                                    <option value="April">April</option>
-                                    <option value="Mei">Mei</option>
-                                    <option value="Juni">Juni</option>
-                                    <option value="Juli">Juli</option>
-                                    <option value="Agustus">Agustus</option>
+                                    <option value="July">July</option>
+                                    <option value="August">August</option>
                                     <option value="September">September</option>
-                                    <option value="Oktober">Oktober</option>
+                                    <option value="October">October</option>
                                     <option value="November">November</option>
-                                    <option value="Desember">Desember</option>
+                                    <option value="December">December</option>
+                                    <option value="January">January</option>
+                                    <option value="February">February</option>
+                                    <option value="March">March</option>
+                                    <option value="April">April</option>
+                                    <option value="May">May</option>
+                                    <option value="June">June</option>
                                 </select>
                         </div>
 

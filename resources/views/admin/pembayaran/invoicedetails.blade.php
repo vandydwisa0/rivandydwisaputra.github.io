@@ -8,6 +8,26 @@
     <title>Print Invoice</title>
 </head>
 <body>
+    <div class="flex justify-center items-center border-b-2 dark:border-gray-600 mb-10">
+        <div class="items-center justify-center">
+            <img src="https://www.dbl.id/uploads/school/3960/115-SMKN_1_KATAPANG.png" class="w-48">
+        </div>
+        <div class="w-10/12">
+            <div class="header text-center my-3">
+                <h4 class="mb-0 font-bold text-sm">PEMERINTAH DAERAH PROVINSI JAWA BARAT </h4>
+                <h4 class="mb-0 font-bold text-sm">DINAS PENDIDIKAN</h4>
+                <h4 class="mb-0 font-bold text-lg">CABANG DINAS PENDIDIKAN WILAYAH VIII</h4>
+                <h4 class="mb-0 font-bold text-lg">SEKOLAH MENEGAH KEJURUSAN NEGERI 1 KATAPANG</h4>
+                <h6 class="mb-0 text-xs">NSS: 341020828004 NPSN : 20206214</h6>
+                <p class="mb-0 text-sm text-gray-700 font-medium">Jln. Ceuri Terusan Kopo KM. 13,5 Telepon: (022) 589-3737</p>
+                <p class="mb-0 text-xs text-gray-700 font-medium">
+                    Faksimil: (022) 589-3636 Website: http://smkn1katapang.sch.id e-mail : smkn1katapang@bdg.centrin.net.id
+                    Kabupatan Bandung - 40921
+                </p>
+            </div>
+        </div>
+    </div>
+
 <div class="p-6 space-y-6">
     @foreach ($pembayaran as $item )
                 <form id="edit">
