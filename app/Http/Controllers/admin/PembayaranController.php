@@ -186,12 +186,13 @@ class PembayaranController extends Controller
             compact('siswa', 'user', 'spp', 'pembayaran')
         );
     }
- 
+
 
     public function searchSiswa(Request $request)
     {
-        $siswa = Siswa::where('nama', 'like', '%' . $request->search . '%')->get();
+        $siswa = Siswa::where('nisn', 'like', '%' . $request->search . '%')->get();
         return response()->json($siswa);
     }
+
 }
 
